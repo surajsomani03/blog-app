@@ -1,14 +1,35 @@
-import React from 'react'
-import styles from "./themeToggle.module.css"
-import Image from 'next/image'
+"use client";
+import React, { useContext } from "react";
+import styles from "./themeToggle.module.css";
+import Image from "next/image";
+import { ThemeContext } from "@/context/ThemeContext";
 const ThemeToggle = () => {
-  return (
-    <div className={styles.container}>
-      <Image src="/moon.png" alt='' height={14} width={14} />
-      <div className={styles.ball}></div>
-      <Image src="/sun.png" alt='' height={14} width={14} />
-    </div>
-  )
-}
+  const { toggle, theme } = useContext(ThemeContext);
 
-export default ThemeToggle
+  // console.log(theme);
+
+  return (
+    <div
+      className={styles.container}
+      onClick={toggle}
+      style={
+        theme === "dark"
+          ? {backgroundColor: "white" }
+          : { backgroundColor: "#0f172a" }
+      }
+    >
+      <Image src="/moon.png" alt="" height={14} width={14} />
+      <div
+        className={styles.ball}
+        style={
+          theme === "dark"
+            ? { left: 1, background: "#0f172a" }
+            : { right: 1, background: "white" }
+        }
+      ></div>
+      <Image src="/sun.png" alt="" height={14} width={14} />
+    </div>
+  );
+};
+
+export default ThemeToggle;
